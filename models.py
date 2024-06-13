@@ -12,18 +12,23 @@ class Cupcake(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 
-    flavor = db.Column(db.String(50), nullable=False)
+    flavor = db.Column(db.Text, nullable=False)
 
-    size = db.Column(db.String(50), nullable=False)
+    size = db.Column(db.Text, nullable=False)
 
     rating = db.Column(db.Float, nullable=False)
 
-    image_url = db.Column(db.String(50), nullable=False)
+    image_url = db.Column(db.Text, nullable=False, default=DEFAULT_CUPCAKE_URL)
 
-    def image_url(self):
-        """return image url"""
-
-        return self.image_url or DEFAULT_CUPCAKE_URL
+    def to_dict(self):
+        """serialize the cupcake SQLAlchemy obj to dictionary"""
+        return {
+            "id":self.id,
+            "flavor": self.flavor,
+            "size": self.size,
+            "rating": self.rating,
+            "image_url":self.image_url
+        }
     
 
 def connect_db(app):
