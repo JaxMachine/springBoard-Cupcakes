@@ -41,6 +41,7 @@ $("#new-cupcake-form").on("submit", async function (evt) {
   });
 
   let newCupcake = $(generateCupcakeHTML(newCupcakeResponse.data.cupcake));
+  console.log(newCupcake);
   $("#cupcakes-list").append(newCupcake);
   $("#new-cupcake-form").trigger("reset");
 });
